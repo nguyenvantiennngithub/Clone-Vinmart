@@ -1,0 +1,263 @@
+﻿
+@model VinMart.Models.ViewModel.ProductIndex
+@{
+    System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var constants = new VinMart.utils.Constants();
+    VinMart.utils.UserSession userSession = Context.Session[constants.UserSession] as VinMart.utils.UserSession;
+}
+<link href="~/public/css/Product/Index.css" rel="stylesheet" />
+@Html.Partial("~/Views/Container/Header.cshtml", Model.CartDetailProducts)
+<div class="navigation">
+    <div class="container">
+        <div class="navigation-container">
+            <div class="navigation-list">
+                <div class="navigation-item navigation-item-menu">
+                    <i class="fa-solid fa-bars navigation-item-icon"></i>
+                    Danh mục sản phẩm
+                    @*
+                        <div class="navigation-dialog-menu">
+                            <div class="navigation-dialog-menu-item">
+                                <a href="#" class="navigation-dialog-menu-item-name">
+                                    Rau - Củ - Trái Cây
+                                    <i class="fa-solid fa-angle-right"></i>
+                                    <div class="navigation-dialog-submenu">
+                                        <div class="navigation-dialog-submenu-menu">
+                                            <div class="navigation-dialog-submenu-menu-item">Trái Cây</div>
+                                            <div class="navigation-dialog-submenu-menu-item">Rau Củ quả</div>
+                                        </div>
+                                        <div href="#" class="navigation-dialog-submenu-image">
+                                            <img class="navigation-dialog-submenu-image-element" src="~/public/images/default-category.png" />
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="navigation-dialog-menu-item-name">
+                                    Rau - Củ - Trái Cây
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="navigation-dialog-menu-item-name">
+                                    Rau - Củ - Trái Cây
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                                <a href="#" class="navigation-dialog-menu-item-name">
+                                    Rau - Củ - Trái Cây
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    *@
+                    <div class="navigation-dialog-menu">
+                        <div class="navigation-dialog-menu-item">
+                            @if (Model.MenuCategory.Count > 0)
+                            {
+                                foreach (var BigCategory in Model.MenuCategory)
+                                {
+                                    <div href="#" class="navigation-dialog-menu-item-name">
+                                        <a href="#" class="navigation-dialog-menu-item-link">@BigCategory.BigDisplayName</a>
+                                        <i class="fa-solid fa-angle-right"></i>
+                                        <div class="navigation-dialog-submenu">
+                                            <div class="navigation-dialog-submenu-menu">
+                                                @foreach (var subCategory in BigCategory.MenuCategoryItem)
+                                                {
+                                                    <a href="#" class="navigation-dialog-submenu-menu-item">@subCategory.CateDisplayName</a>
+                                                }
+                                            </div>
+                                            <div href="#" class="navigation-dialog-submenu-image">
+                                                <img class="navigation-dialog-submenu-image-element" src="@BigCategory.BigMediaURL" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-list">
+                <div class="navigation-item">
+                    <i class="fa-solid fa-chevron-down navigation-item-icon"></i>
+                    Sản phẩm đã xem
+                </div>
+                <div class="navigation-item">
+                    <i class="fa-regular fa-envelope navigation-item-icon"></i>
+                    Tin tức VinMart
+                </div>
+                <div class="navigation-item">
+                    <i class="fa-solid fa-headphones navigation-item-icon"></i>
+                    Tư vấn mua hàng
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="banner" id="banner" data-show="0">
+    <div class="container">
+        <div class="frame">
+            <div class="track">
+                <div class="row banner-item">
+                    <img src="~/public/images/default-banner.jpg" class="banner-item-image" />
+                </div>
+                <div class="row banner-item">
+                    <img src="~/public/images/default-banner.jpg" class="banner-item-image" />
+                </div>
+                <div class="row banner-item">
+                    <img src="~/public/images/default-banner.jpg" class="banner-item-image" />
+                </div>
+                <div class="row banner-item">
+                    <img src="~/public/images/default-banner.jpg" class="banner-item-image" />
+                </div>
+            </div>
+            <div class="arrow banner-navigate-item left" id="decrease"><svg role="img" aria-label="Go back" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path> </svg></div>
+            <div class="arrow banner-navigate-item right" id="increase"><svg role="img" aria-label="Go next" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path> </svg></div>
+            <div class="banner-navigate">
+                <div class="banner-navigate-list">
+                    <div class="dot banner-navigate-item" data-goto="0"></div>
+                    <div class="dot banner-navigate-item" data-goto="1"></div>
+                    <div class="dot banner-navigate-item" data-goto="2"></div>
+                    <div class="dot banner-navigate-item" data-goto="3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product">
+    <div class="container product-container">
+
+        @foreach (var productCategory in Model.ProductCategory)
+        {
+
+            <div class="product-category-container" data-page="1" data-bigcategory="@productCategory.Id">
+                <h3 class="product-title">@productCategory.DisplayName</h3>
+                <div class="row" style="margin: 0; background-color: #fff;">
+                    @foreach (var product in productCategory.Products)
+                    {
+                        <div class="col-lg-3">
+                            <div class="product-item cart-item" data-id="@product.Id">
+                                <div class="product-image">
+                                    <img class="product-image-element" src="@product.MediaURL" />
+                                    <div class="product-sale">-13%</div>
+                                </div>
+                                <a href="/Product/Detail/@product.Id" class="product-name">@product.DisplayName</a>
+                                <p class="product-unit">DVT: Chai</p>
+
+                                <p class="product-price">@product.Price.ToString("#,###₫", cul.NumberFormat)</p>
+                                @if (product.SalePrice == product.Price)
+                                {
+                                    <p class="product-fakeprice"></p>
+                                }
+                                else
+                                {
+                                    <p class="product-fakeprice">@product.SalePrice.ToString("#,###₫", cul.NumberFormat)</p>
+                                }
+
+                                @if (Model.CartDetails != null)
+                                    {
+                                        var cartItem = Model.CartDetails.FirstOrDefault(cart => cart.IdProduct == product.Id);
+                                        if (cartItem != null)
+                                        {
+                                        <div class="product-container-btn">
+                                            <div class="product-couter cart-quantity" data-type="decrease"><i class="fa-solid fa-minus"></i></div>
+                                            <span class="product-count cart-value">@cartItem.Count</span>
+                                            <div class="product-couter cart-quantity" data-type="increase"><i class="fa-solid fa-plus"></i></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <button class="product-add cart-add">Thêm vào giỏ</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="product-add cart-add">Thêm vào giỏ</button>
+                                }
+
+                                @*<div class="product-container-btn">
+                                    <div class="product-couter cart-quantity" data-type="decrease"><i class="fa-solid fa-minus"></i></div>
+                                    <span class="product-count cart-value">1</span>
+                                    <div class="product-couter cart-quantity" data-type="increase"><i class="fa-solid fa-plus"></i></div>
+                                </div>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (productCategory.Count - productCategory.Products.Count > 0)
+                {
+                    <div class="more">
+
+                        <div>
+                            <button class="product-more">
+                                Xem thêm
+                                @(productCategory.Count - productCategory.Products.Count)
+                                sản phẩm
+                                <span style="font-weight: 700; margin-right: 8px;">@productCategory.DisplayName</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        @*<h3 class="product-title">Sản Phẩm Khuyến Mãi</h3>
+            <div class="row" style="margin: 0; background-color: #fff;">*@
+        @* <div class="col-lg-3">
+                <div class="product-item">
+                    <div class="product-image">
+                        <img class="product-image-element" src="~/public/images/default-product.jpg" />
+                        <div class="product-sale">-13%</div>
+                    </div>
+                    <a href="#" class="product-name">Sửa tắm Aiken sạch khuẩn</a>
+                    <p class="product-unit">DVT: Chai</p>
+                    <p class="product-price">80.000d</p>
+                    <p class="product-fakeprice">140.000d</p>
+                    <button class="product-add">Thêm vào giỏ</button>
+                    <div class="product-container-btn">
+                        <div class="product-toggle"><i class="fa-solid fa-minus"></i></div>
+                        <span class="product-count">1</span>
+                        <div class="product-toggle"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                </div>
+            </div> *@
+        @* </div>
+            <div class="more">
+                <button class="product-more">
+                    Xem thêm 210 sản phẩm
+                    <span style="font-weight: 700; margin-right: 8px;">Sản Phẩm Khuyến Mãi</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+            </div> *@
+
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalNotLoggedIn" tabindex="-1" role="dialog" aria-labelledby="modalNotLoggedInTitle" aria-hidden="true">
+    <div class="modal-dialog" style="position: absolute; left: 0; right: 0; bottom: 50%" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex">
+                <h5 class="modal-title" id="modalNotLoggedInTitle" style="font-weight: bold; font-size: 18px">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: auto">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn cần đăng nhập để thực hiện chức năng này
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Để sau</button>
+                @Html.ActionLink("Đăng nhập", "Login", "Auth", null,  new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
+@RenderPage("../Container/Footer.cshtml")
+
+<div class="overlay" id="overlay"></div>
+
+<script src="~/public/js/Product/Animation.js" type="text/javascript"></script>
+<script src="~/public/js/Product/Paging.js" type="text/javascript"></script>
+<script src="~/public/js/Product/Cart.js" type="text/javascript"></script>
+<script src="~/public/js/Cart.js" type="text/javascript"></script>

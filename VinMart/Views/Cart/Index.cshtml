@@ -1,0 +1,102 @@
+﻿@model VinMart.Models.ViewModel.CartIndex
+@{ 
+    System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<link href="~/public/css/Cart/Index.css" rel="stylesheet" />
+@Html.Partial("~/Views/Container/Header.cshtml", Model.CartDetailProducts)
+
+<div class="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="cart-info">
+                    <div class="cart-info-btns">
+                        <a href="/Product/Index" class="cart-info-btns-btn danger">Tiếp tục mua hàng</a>
+                        <button class="cart-info-btns-btn secondary" id="cart-delete-all">Xóa giỏ hàng?</button>
+                    </div>
+                    @if (Model.CartDetailProducts.Count > 0)
+                    {
+                        <div class="cart-info-product">
+                            @foreach (var item in Model.CartDetailProducts)
+                            {
+                                <div class="cart-info-product-item cart-item" data-id="@item.Product.Id">
+                                    <div class="cart-info-product-item-logo">
+                                        <img class="cart-info-product-item-logo-element" src="@item.Product.MediaURL" />
+                                    </div>
+                                    <div class="cart-info-product-item-info">
+                                        <a href="/Product/Detail/@item.Product.Id" class="cart-info-product-item-info-name">@item.Product.DisplayName</a>
+                                        <p class="cart-info-product-item-info-unit">ĐVT: Quên field này r</p>
+                                        <p class="cart-info-product-item-info-delete cart-delete"><i class="fa-regular fa-trash-can" style="margin-right: 4px;"></i>Xóa giỏ hàng</p>
+                                    </div>
+                                    <div class="cart-info-product-item-sell">
+                                        <p class="cart-info-product-item-sell-price">@item.Product.Price.ToString("#,###₫", cul.NumberFormat)</p>
+                                        <p class="cart-info-product-item-sell-fakeprice">@item.Product.SalePrice.ToString("#,###₫", cul.NumberFormat)</p>
+                                        <p class="cart-info-product-item-sell-discount">(-13%)</p>
+                                    </div>
+                                    <div class="cart-info-product-item-btns">
+                                        <span class="cart-info-product-item-btns-btn cart-quantity" data-type="decrease">
+                                            <i class="fa-solid fa-minus cart-info-product-item-btns-btn-icon"></i>
+                                        </span>
+                                        <span class="cart-info-product-item-btns-value cart-value">@item.Count</span>
+                                        <span class="cart-info-product-item-btns-btn cart-quantity" data-type="increase">
+                                            <i class="fa-solid fa-plus cart-info-product-item-btns-btn-icon"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                            @*<div class="cart-info-product-item">
+                                <div class="cart-info-product-item-logo">
+                                    <img class="cart-info-product-item-logo-element" src="~/public/images/default-product.jpg" />
+                                </div>
+                                <div class="cart-info-product-item-info">
+                                    <a href="#" class="cart-info-product-item-info-name">Lốc 4 chai</a>
+                                    <p class="cart-info-product-item-info-unit">ĐVT: GÓI 4</p>
+                                    <p class="cart-info-product-item-info-delete"><i class="fa-regular fa-trash-can" style="margin-right: 4px;"></i>Xóa giỏ hàng</p>
+                                </div>
+                                <div class="cart-info-product-item-sell">
+                                    <p class="cart-info-product-item-sell-price">31.600 đ</p>
+                                    <p class="cart-info-product-item-sell-fakeprice">31.600 đ</p>
+                                    <p class="cart-info-product-item-sell-discount">(-13%)</p>
+                                </div>
+                                <div class="cart-info-product-item-btns">
+                                    <span class="cart-info-product-item-btns-btn">
+                                        <i class="fa-solid fa-minus cart-info-product-item-btns-btn-icon"></i>
+                                    </span>
+                                    <span class="cart-info-product-item-btns-value">1</span>
+                                    <span class="cart-info-product-item-btns-btn">
+                                        <i class="fa-solid fa-plus cart-info-product-item-btns-btn-icon"></i>
+                                    </span>
+                                </div>
+                            </div>*@
+                        </div>
+                    }
+                    else {
+                        <div class="cart-empty">
+                            <div class="cart-empty-container">
+                                <img src="~/public/images/no-cart.png" />
+                            </div>
+                        </div>    
+                    }
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cart-pay">
+                    <div class="cart-pay-row">
+                        <span class="cart-pay-row-item">Tạm tính: </span>
+                        <span class="cart-pay-row-item" id="cart-temp-price">@Model.CartDetailProducts.Sum(cart => (cart.Product.Price * cart.Count)).ToString("#,###₫", cul.NumberFormat)</span>
+                    </div>
+                    <div class="cart-pay-row">
+                        <span class="cart-pay-row-item">Thành tiền: </span>
+                        <span class="cart-pay-row-item red" id="cart-price">@Model.CartDetailProducts.Sum(cart => (cart.Product.Price * cart.Count)).ToString("#,###₫", cul.NumberFormat)</span>
+                    </div>
+                    <form action="/Cart/Payment" method="post">
+                        <button class="cart-pay-submit" type="submit">Thanh Toán</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@RenderPage("../Container/Footer.cshtml")
+<script src="~/public/js/Cart.js" type="text/javascript"></script>
+<script src="~/public/js/Cart/Cart.js" type="text/javascript"></script>

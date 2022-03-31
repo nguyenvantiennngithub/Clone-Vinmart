@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VinMartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="birthDay" Type="date" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="13" />
+          <Property Name="gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="province" Type="nvarchar" MaxLength="20" />
+          <Property Name="district" Type="nvarchar" MaxLength="20" />
+          <Property Name="commune" Type="nvarchar" MaxLength="20" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="detail" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="AccountPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BigCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="mediaURL" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="idProduct" />
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idBigCategory" Type="int" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryAddress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="province" Type="nvarchar" MaxLength="100" />
+          <Property Name="district" Type="nvarchar" MaxLength="100" />
+          <Property Name="commune" Type="nvarchar" MaxLength="100" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="detail" Type="nvarchar" MaxLength="200" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCategory" Type="int" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="mediaURL" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="salePrice" Type="float" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idProductDetail" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ingredients" Type="nvarchar" MaxLength="200" />
+          <Property Name="preserve" Type="nvarchar" MaxLength="200" />
+          <Property Name="origin" Type="nvarchar" MaxLength="200" />
+          <Property Name="manuals" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" />
+          <Property Name="createAt" Type="date" />
+          <Property Name="idDeliveryAddress" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPurchase" Type="int" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="idProduct" Type="int" />
+          <Property Name="count" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Account__positio__267ABA7A">
+          <End Role="AccountPosition" Type="Self.AccountPosition" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountDetai__id__29572725">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountDetail" Type="Self.AccountDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AccountDetail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__idPro__3A81B327">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__idUse__3B75D760">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__idBigC__2F10007B">
+          <End Role="BigCategory" Type="Self.BigCategory" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BigCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="idBigCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__35BCFE0A">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idProdu__36B12243">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idProductDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__status__37A5467C">
+          <End Role="ProductStatus" Type="Self.ProductStatus" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__idDeli__4222D4EF">
+          <End Role="DeliveryAddress" Type="Self.DeliveryAddress" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryAddress">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="idDeliveryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__idUser__403A8C7D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseD__idPro__45F365D3">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseD__idPur__44FF419A">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="idPurchase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VinMartModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountDetail" EntityType="Self.AccountDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountPosition" EntityType="Self.AccountPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BigCategory" EntityType="Self.BigCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryAddress" EntityType="Self.DeliveryAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductStatus" EntityType="Self.ProductStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__positio__267ABA7A" Association="Self.FK__Account__positio__267ABA7A">
+            <End Role="AccountPosition" EntitySet="AccountPosition" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountDetai__id__29572725" Association="Self.FK__AccountDetai__id__29572725">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountDetail" EntitySet="AccountDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__idPro__3A81B327" Association="Self.FK__CartDetai__idPro__3A81B327">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__idUse__3B75D760" Association="Self.FK__CartDetai__idUse__3B75D760">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__idBigC__2F10007B" Association="Self.FK__Category__idBigC__2F10007B">
+            <End Role="BigCategory" EntitySet="BigCategory" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__35BCFE0A" Association="Self.FK__Product__idCateg__35BCFE0A">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idProdu__36B12243" Association="Self.FK__Product__idProdu__36B12243">
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__status__37A5467C" Association="Self.FK__Product__status__37A5467C">
+            <End Role="ProductStatus" EntitySet="ProductStatus" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__idDeli__4222D4EF" Association="Self.FK__Purchase__idDeli__4222D4EF">
+            <End Role="DeliveryAddress" EntitySet="DeliveryAddress" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__idUser__403A8C7D" Association="Self.FK__Purchase__idUser__403A8C7D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseD__idPro__45F365D3" Association="Self.FK__PurchaseD__idPro__45F365D3">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseD__idPur__44FF419A" Association="Self.FK__PurchaseD__idPur__44FF419A">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VinMartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountPosition" Relationship="Self.FK__Account__positio__267ABA7A" FromRole="Account" ToRole="AccountPosition" />
+          <NavigationProperty Name="AccountDetail" Relationship="Self.FK__AccountDetai__id__29572725" FromRole="Account" ToRole="AccountDetail" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__idUse__3B75D760" FromRole="Account" ToRole="CartDetail" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__idUser__403A8C7D" FromRole="Account" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Precision="0" />
+          <Property Name="phoneNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="commune" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="detail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__AccountDetai__id__29572725" FromRole="AccountDetail" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="AccountPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__positio__267ABA7A" FromRole="AccountPosition" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="BigCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="displayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mediaURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Category__idBigC__2F10007B" FromRole="BigCategory" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="idProduct" />
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__CartDetai__idUse__3B75D760" FromRole="CartDetail" ToRole="Account" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__CartDetai__idPro__3A81B327" FromRole="CartDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idBigCategory" Type="Int32" Nullable="false" />
+          <Property Name="displayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BigCategory" Relationship="Self.FK__Category__idBigC__2F10007B" FromRole="Category" ToRole="BigCategory" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__idCateg__35BCFE0A" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="DeliveryAddress">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="province" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="commune" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="detail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__idDeli__4222D4EF" FromRole="DeliveryAddress" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCategory" Type="Int32" />
+          <Property Name="displayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mediaURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="salePrice" Type="Double" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idProductDetail" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__idPro__3A81B327" FromRole="Product" ToRole="CartDetail" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__idCateg__35BCFE0A" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductDetail" Relationship="Self.FK__Product__idProdu__36B12243" FromRole="Product" ToRole="ProductDetail" />
+          <NavigationProperty Name="ProductStatu" Relationship="Self.FK__Product__status__37A5467C" FromRole="Product" ToRole="ProductStatus" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK__PurchaseD__idPro__45F365D3" FromRole="Product" ToRole="PurchaseDetail" />
+        </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ingredients" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="preserve" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="origin" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="manuals" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__idProdu__36B12243" FromRole="ProductDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductStatu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__status__37A5467C" FromRole="ProductStatus" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" />
+          <Property Name="createAt" Type="DateTime" Precision="0" />
+          <Property Name="idDeliveryAddress" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Purchase__idUser__403A8C7D" FromRole="Purchase" ToRole="Account" />
+          <NavigationProperty Name="DeliveryAddress" Relationship="Self.FK__Purchase__idDeli__4222D4EF" FromRole="Purchase" ToRole="DeliveryAddress" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK__PurchaseD__idPur__44FF419A" FromRole="Purchase" ToRole="PurchaseDetail" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPurchase" Type="Int32" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__PurchaseD__idPro__45F365D3" FromRole="PurchaseDetail" ToRole="Product" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK__PurchaseD__idPur__44FF419A" FromRole="PurchaseDetail" ToRole="Purchase" />
+        </EntityType>
+        <Association Name="FK__Account__positio__267ABA7A">
+          <End Role="AccountPosition" Type="Self.AccountPosition" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AccountDetai__id__29572725">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="AccountDetail" Type="Self.AccountDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AccountDetail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__idUse__3B75D760">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__idUser__403A8C7D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category__idBigC__2F10007B">
+          <End Role="BigCategory" Type="Self.BigCategory" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BigCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="idBigCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__idPro__3A81B327">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__35BCFE0A">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__idDeli__4222D4EF">
+          <End Role="DeliveryAddress" Type="Self.DeliveryAddress" Multiplicity="0..1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryAddress">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="idDeliveryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idProdu__36B12243">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idProductDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__status__37A5467C">
+          <End Role="ProductStatus" Type="Self.ProductStatu" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseD__idPro__45F365D3">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseD__idPur__44FF419A">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="idPurchase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VinMartEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetail" />
+          <EntitySet Name="AccountPositions" EntityType="Self.AccountPosition" />
+          <EntitySet Name="BigCategories" EntityType="Self.BigCategory" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetail" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DeliveryAddresses" EntityType="Self.DeliveryAddress" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductDetails" EntityType="Self.ProductDetail" />
+          <EntitySet Name="ProductStatus" EntityType="Self.ProductStatu" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+          <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetail" />
+          <AssociationSet Name="FK__Account__positio__267ABA7A" Association="Self.FK__Account__positio__267ABA7A">
+            <End Role="AccountPosition" EntitySet="AccountPositions" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AccountDetai__id__29572725" Association="Self.FK__AccountDetai__id__29572725">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountDetail" EntitySet="AccountDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__idUse__3B75D760" Association="Self.FK__CartDetai__idUse__3B75D760">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__idUser__403A8C7D" Association="Self.FK__Purchase__idUser__403A8C7D">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category__idBigC__2F10007B" Association="Self.FK__Category__idBigC__2F10007B">
+            <End Role="BigCategory" EntitySet="BigCategories" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__idPro__3A81B327" Association="Self.FK__CartDetai__idPro__3A81B327">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__35BCFE0A" Association="Self.FK__Product__idCateg__35BCFE0A">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__idDeli__4222D4EF" Association="Self.FK__Purchase__idDeli__4222D4EF">
+            <End Role="DeliveryAddress" EntitySet="DeliveryAddresses" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idProdu__36B12243" Association="Self.FK__Product__idProdu__36B12243">
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__status__37A5467C" Association="Self.FK__Product__status__37A5467C">
+            <End Role="ProductStatus" EntitySet="ProductStatus" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseD__idPro__45F365D3" Association="Self.FK__PurchaseD__idPro__45F365D3">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseD__idPur__44FF419A" Association="Self.FK__PurchaseD__idPur__44FF419A">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VinMartModelStoreContainer" CdmEntityContainer="VinMartEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="VinMartModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountDetails">
+            <EntityTypeMapping TypeName="VinMartModel.AccountDetail">
+              <MappingFragment StoreEntitySet="AccountDetail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="commune" ColumnName="commune" />
+                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountPositions">
+            <EntityTypeMapping TypeName="VinMartModel.AccountPosition">
+              <MappingFragment StoreEntitySet="AccountPosition">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BigCategories">
+            <EntityTypeMapping TypeName="VinMartModel.BigCategory">
+              <MappingFragment StoreEntitySet="BigCategory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="mediaURL" ColumnName="mediaURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetails">
+            <EntityTypeMapping TypeName="VinMartModel.CartDetail">
+              <MappingFragment StoreEntitySet="CartDetail">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="VinMartModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idBigCategory" ColumnName="idBigCategory" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryAddresses">
+            <EntityTypeMapping TypeName="VinMartModel.DeliveryAddress">
+              <MappingFragment StoreEntitySet="DeliveryAddress">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="commune" ColumnName="commune" />
+                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="VinMartModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+                <ScalarProperty Name="mediaURL" ColumnName="mediaURL" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="salePrice" ColumnName="salePrice" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="idProductDetail" ColumnName="idProductDetail" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetails">
+            <EntityTypeMapping TypeName="VinMartModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ingredients" ColumnName="ingredients" />
+                <ScalarProperty Name="preserve" ColumnName="preserve" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="manuals" ColumnName="manuals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductStatus">
+            <EntityTypeMapping TypeName="VinMartModel.ProductStatu">
+              <MappingFragment StoreEntitySet="ProductStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="VinMartModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="createAt" ColumnName="createAt" />
+                <ScalarProperty Name="idDeliveryAddress" ColumnName="idDeliveryAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseDetails">
+            <EntityTypeMapping TypeName="VinMartModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idPurchase" ColumnName="idPurchase" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

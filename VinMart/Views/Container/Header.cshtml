@@ -1,0 +1,146 @@
+﻿@model List<VinMart.Models.DTO.CartDetailProductDTO>
+
+<link href="~/public/css/header.css" rel="stylesheet" />
+@{
+    var constants = new VinMart.utils.Constants();
+    VinMart.utils.UserSession userSession = Context.Session[constants.UserSession] as VinMart.utils.UserSession;
+    System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<div class="header">
+    <div class="container header-container">
+        <a class="header-logo" href="/Product/Index">
+            <img src="~/public/images/logo-header.png" class="header-logo-element" />
+        </a>
+        <div class="header-search header-item">
+            <input type="text" placeholder="Nhập tên sản phẩm, mã sản phẩm, từ khóa cần tìm..." class="header-search-element" />
+            <div class="header-search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+
+        <div class="header-cart header-item">
+            <div class="header-cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <p class="header-base-text" id="cart-text">Giỏ hàng 
+                (@Model.Count)
+            </p>
+            @* DIALOG CART *@
+            <div class="header-dialog-cart">
+                <div class="header-dialog-cart-list" id="cart-dialog-list">
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var cartItem in Model)
+                        {
+                            <div class="header-dialog-cart-item" data-id="@cartItem.Product.Id">
+                                <div class="header-dialog-cart-item-logo">
+                                    <img src="@cartItem.Product.MediaURL" class="header-dialog-cart-item-logo-element" />
+                                </div>
+                                <div class="header-dialog-cart-item-content">
+                                    <a href="/Product/Detail/@cartItem.Product.Id" class="header-dialog-account-item-content-displayname">@cartItem.Product.DisplayName</a>
+                                    <span class="header-dialog-account-item-content-unit">DVT: Chai</span>
+                                    <div class="header-dialog-cart-item-content-container">
+                                        <span class="header-dialog-cart-item-content-count">x @cartItem.Count</span>
+                                        <span class="header-dialog-cart-item-content-price">@cartItem.Product.Price.ToString("#,###₫", cul.NumberFormat)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="header-dialog-cart-item-no-cart" id="no-cart">
+                            <div class="header-dialog-cart-empty">
+                                <img src="~/public/images/no-cart.png"/>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="header-dialog-cart-total">
+                    <span class="header-dialog-cart-total-count" id="cart-total-count">Có tổng cộng @Model.Count sản phẩm</span>
+                    <span class="header-dialog-cart-total-price">
+                        Tổng tiền:
+                        <span class="header-dialog-cart-item-content-price" id="cart-total-price">
+                            @Model.Sum(cart => cart.Product.Price).ToString("#,###₫", cul.NumberFormat)
+                        </span>
+                    </span>
+                </div>
+                <div class="header-dialog-cart-action">
+                    <a href="/Cart/Index" class="btn header-dialog-cart-action-detail">Xem chi tiết</a>
+                    <button class="header-dialog-cart-action-pay">Thanh toán ngay</button>
+                </div>
+            </div>
+        </div>
+        <div class="header-account header-item">
+            <div class="header-account-logo">
+                <img class="header-account-logo-element" src="~/public/images/default-logo.png" />
+            </div>
+            <p class="header-base-text">@(userSession != null ? userSession.DisplayName : "Guess")</p>
+            @* DIALOG USER *@
+            <div class="header-dialog-account">
+                @{
+                    if (userSession != null) //LoggedIn
+                    {
+                        if (userSession.Position == 1)//Admin position
+                        {
+                            <a href="/" class="header-dialog-account-item">
+                                <div class="header-dialog-account-item-container">
+                                    <i class="fa-solid fa-user-check fa-1x"></i>
+                                </div>
+                                <span>Admin</span>
+
+                            </a>
+                        }
+                        <a href="/" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span>Tài khoảng</span>
+                        </a>
+
+                        <a href="/" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-address-book fa-1x"></i>
+                            </div>
+                            <span>Sổ địa chỉ</span>
+
+                        </a>
+                        <a href="/" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-wallet fa-1x"></i>
+                            </div>
+                            <span>Lịch sử mua hàng</span>
+
+                        </a>
+                        <a href="/" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-right-from-bracket fa-1x"></i>
+                            </div>
+                            <span>Đăng xuất</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Auth/Login" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-user-plus fa-1x"></i>
+                            </div>
+                            <span> Đăng nhập</span>
+                        </a>
+                        <a href="/Auth/Register" class="header-dialog-account-item">
+                            <div class="header-dialog-account-item-container">
+                                <i class="fa-solid fa-user-pen fa-1x"></i>
+                            </div>
+                            <span>Đăng ký</span>
+
+
+                        </a>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

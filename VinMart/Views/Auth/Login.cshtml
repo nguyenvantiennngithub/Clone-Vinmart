@@ -1,0 +1,38 @@
+﻿@model VinMart.Models.Account
+<link href="~/public/css/Auth/Login.css" rel="stylesheet" />
+<div class="login">
+    <div class="container">
+        <div class="login-container col-lg-4 col-lg-offset-4">
+            <div class="login-logo">
+                <img class="login-logo-element" src="~/public/images/Auth/logo.png" />
+            </div>
+            <h3 class="login-title">Đăng nhập</h3>
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { id = "login-form" }))
+            {
+                <div class="login-input">
+                    @Html.TextBoxFor(ac => ac.username, new { @class = "login-input-element", placeholder = "Nhập tài khoảng", id = "username" })
+                    <span class="login-input-message">Vui lòng nhập đủ thông tin</span>
+                </div>
+                <div class="login-input">
+                    @Html.PasswordFor(ac => ac.password, new { @class = "login-input-element", placeholder = "Nhập mật khẩu", id = "password" })
+
+                    <span class="login-input-message">Vui lòng nhập đủ thông tin</span>
+                </div>
+                <a class="login-forgot" href="#">Quên mật khẩu?</a>
+
+                <button class="login-btn" type="submit">ĐĂNG NHẬP</button>
+                <button class="login-btn" type="button">TRANG CHỦ</button>
+                <a href="#" class="login-register">Tạo tài khoảng</a>
+            }
+
+        </div>
+    </div>
+</div>
+<script src="~/public/js/Auth/login.js"></script>
