@@ -20,12 +20,12 @@ namespace VinMart.Models
         }
     
         public int id { get; set; }
-        public Nullable<int> idUser { get; set; }
+        public int idAddress { get; set; }
+        public int idUser { get; set; }
         public Nullable<System.DateTime> createAt { get; set; }
-        public Nullable<int> idDeliveryAddress { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual DeliveryAddress DeliveryAddress { get; set; }
+        public virtual Address Address { get; set; }
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }

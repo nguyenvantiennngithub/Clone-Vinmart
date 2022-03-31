@@ -12,21 +12,24 @@ namespace VinMart.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DeliveryAddress
+    public partial class Address
     {
-        public DeliveryAddress()
+        public Address()
         {
+            this.AddressUsers = new HashSet<AddressUser>();
             this.Purchases = new HashSet<Purchase>();
         }
     
         public int id { get; set; }
+        public string name { get; set; }
+        public string phoneNumber { get; set; }
+        public string email { get; set; }
         public string province { get; set; }
         public string district { get; set; }
         public string commune { get; set; }
         public string apartmentNumber { get; set; }
-        public string detail { get; set; }
-        public string phoneNumber { get; set; }
     
+        public virtual ICollection<AddressUser> AddressUsers { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

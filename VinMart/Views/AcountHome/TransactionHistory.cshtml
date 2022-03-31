@@ -1,0 +1,61 @@
+﻿@model VinMart.Models.ViewModel.HistoryTransactionVM
+
+@{
+    ViewBag.Title = "TransactionHistory";
+    Layout = "~/Views/AcountHome/Home.cshtml";
+}
+@*@Html.Partial("~/Views/Container/Header.cshtml", Model.CartDetailProducts)*@
+@Html.Partial("~/Views/Container/Header.cshtml", Model.CartDetailProducts)
+<h2>Lịch Sử Giao Dịch</h2>
+<fieldset>
+    <div style="min-height: 300px">
+        <table class="table">
+            <tr>
+                <th>
+                    Mã Đơn Hàng
+                </th>
+                <th>
+                    Địa Chỉ
+                </th>
+                <th>
+                    Thời Gian
+                </th>
+                <th>
+                    Sản Phẩm
+                </th>
+                <th>
+                    Số Lượng
+                </th>
+                <th>
+                    Đơn Giá
+                </th>
+            </tr>
+
+            @foreach (var item in Model.List)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @item.Province, @item.District, @item.Commune, @item.ApartmentNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Count)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</fieldset>

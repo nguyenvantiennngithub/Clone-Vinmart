@@ -12,15 +12,13 @@ namespace VinMart.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseDetail
+    public partial class AddressUser
     {
         public int id { get; set; }
-        public int idPurchase { get; set; }
-        public int idProduct { get; set; }
-        public double price { get; set; }
-        public int count { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public Nullable<int> idAddress { get; set; }
     
-        public virtual Product Product { get; set; }
-        public virtual Purchase Purchase { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

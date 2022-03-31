@@ -1,0 +1,52 @@
+﻿@*@model VinMart.Models.BigCategory
+
+
+    @using (Html.BeginForm())
+    {
+        <div>
+            <h3>Tên Bigcatagory</h3>
+            <input type="text" name="displayName" />
+        </div>
+        <div>
+            <h3>URL</h3>
+            <input type="text" name="mediaURL" />
+        </div>
+        <div>
+            <input type="submit" value="Create" />
+        </div>
+
+
+    }
+    @Html.ActionLink("Back to list", "Index")*@
+
+
+@model VinMart.Models.BigCategory
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+                <h2>Create Big Category</h2>
+                @Html.ActionLink("Trang chủ", "Index", null, new { @class = "btn btn-success" });
+            </div>
+            <form action="/BigCategory/Create" method="post" enctype="multipart/form-data">
+                <div class="form-group" style="display: none;">
+                    @Html.LabelFor(m => m.id)
+                    @Html.EditorFor(m => m.id, null, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.displayName)
+                    @Html.EditorFor(m => m.displayName, null, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mediaURL)
+                    @Html.TextBoxFor(m => m.mediaURL,null, new { @class = "form-control", type = "file" })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Tạo mới</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>

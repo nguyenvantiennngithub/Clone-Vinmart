@@ -28,10 +28,11 @@ namespace VinMart.Models
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountDetail> AccountDetails { get; set; }
         public DbSet<AccountPosition> AccountPositions { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<AddressUser> AddressUsers { get; set; }
         public DbSet<BigCategory> BigCategories { get; set; }
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<DeliveryAddress> DeliveryAddresses { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductDetail> ProductDetails { get; set; }
         public DbSet<ProductStatu> ProductStatus { get; set; }

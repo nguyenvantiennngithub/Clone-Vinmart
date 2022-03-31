@@ -1,0 +1,30 @@
+﻿body {
+}
+
+.Title {
+    float: left;
+}
+
+.Address-header {
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+    .Address-header a {
+        text-decoration: none;
+        display: block;
+        border-radius: 10px;
+        color: white;
+        background-color: red;
+        text-align: center;
+        font-size: 15;
+        float: right;
+        width: 15%;
+    }
+
+    .Address-header h2 {
+        float: left;
+        padding-left: 20%;
+    }

@@ -1,0 +1,95 @@
+﻿@model VinMart.Models.RES.AccountRES
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    @*thêm thư viện css*@
+    <link href="~/Contents/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="form-register" style="text-align: center">
+        @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div id="form-form-register" style="display: inline-block">
+                <div style="text-align: center">
+                    <img style="height: 100px;   width: 100%; display: inline-block" id="img" src="~/public/images/Auth/logo.png" alt="Alternate Text" />
+                </div>
+                <div style="text-align: center">
+                    <h3 style="display: inline-block; font-size: 30px">Register</h3>
+                </div>                
+                <div style="text-align: center">
+                    <h3 style="display: inline-block; font-size: 20px">Enter your information</h3>
+                </div>
+                <div>
+                    <table>                        
+                        <tr>
+                            <td>@Html.LabelFor(m => m.DisplayName)</td>
+                            <td>@Html.TextBoxFor(m => m.DisplayName)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(m => m.DisplayName)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.Email)</td>
+                            <td>@Html.TextBoxFor(m => m.Email)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(m => m.Email)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @if (ViewBag.error != null)
+                                {
+                                    <span class="field-validation-error">@ViewBag.error</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.Username)</td>
+                            <td>@Html.TextBoxFor(m => m.Username)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(m => m.Username)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.Password)</td>
+                            <td>@Html.PasswordFor(m => m.Password)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(m => m.Password)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(m => m.Confirmpasword)</td>
+                            <td>@Html.PasswordFor(m => m.Confirmpasword)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(m => m.Confirmpasword)</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div style="text-align: center">
+                    <input style="display: inline-block" type="submit" value="Register" />
+                </div>
+                <div style="text-align: right">
+                    <a style="display: inline-block" href="@Url.Action("Register", "Login")">Login</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

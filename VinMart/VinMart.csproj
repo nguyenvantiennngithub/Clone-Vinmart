@@ -120,12 +120,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BigCategoryController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AcountHomeController.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -133,6 +135,13 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountPosition.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AcountFullDetail.cs" />
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddressUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BigCategory.cs">
@@ -147,9 +156,6 @@
     <Compile Include="Models\DAO\CartDAO.cs" />
     <Compile Include="Models\DAO\CategoryDAO.cs" />
     <Compile Include="Models\DAO\ProductDAO.cs" />
-    <Compile Include="Models\DeliveryAddress.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DTO\BigCategoryDTO.cs" />
     <Compile Include="Models\DTO\CartDetailDTO.cs" />
     <Compile Include="Models\DTO\CartDetailProductDTO.cs" />
@@ -160,6 +166,8 @@
     <Compile Include="Models\DTO\ProductDTO.cs" />
     <Compile Include="Models\DTO\ProductGroupByBigCategoryDTO.cs" />
     <Compile Include="Models\DTO\ProductGroupByBigCategoryItemDTO.cs" />
+    <Compile Include="Models\DTO\PurchaseDTO.cs" />
+    <Compile Include="Models\DTO\PurchaseItemDTO.cs" />
     <Compile Include="Models\DTO\StatusDTO.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -191,8 +199,16 @@
     <Compile Include="Models\PurchaseDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PurchaseFullDetail.cs" />
+    <Compile Include="Models\RES\AccountRES.cs" />
     <Compile Include="Models\RES\AddCartRES.cs" />
+    <Compile Include="Models\RES\BigCategoryRES.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\ViewModel\AccountListAddressVM.cs" />
+    <Compile Include="Models\ViewModel\AddAccountVM.cs" />
+    <Compile Include="Models\ViewModel\AddAddressVM.cs" />
     <Compile Include="Models\ViewModel\CartIndex.cs" />
+    <Compile Include="Models\ViewModel\HistoryTransactionVM.cs" />
     <Compile Include="Models\ViewModel\ProductDetail.cs" />
     <Compile Include="Models\ViewModel\ProductDetailVM.cs" />
     <Compile Include="Models\ViewModel\ProductIndex.cs" />
@@ -219,6 +235,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="public\css\Acount\Acount.css" />
+    <Content Include="public\css\Acount\AcountHome.css" />
+    <Content Include="public\css\Acount\Address.css" />
     <Content Include="public\css\Auth\Login.css" />
     <Content Include="public\css\base.css" />
     <Content Include="public\css\Cart\Index.css" />
@@ -2123,6 +2142,16 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Auth\Block.cshtml" />
+    <Content Include="Views\AcountHome\Acount.cshtml" />
+    <Content Include="Views\AcountHome\Address.cshtml" />
+    <Content Include="Views\AcountHome\AddressAdd.cshtml" />
+    <Content Include="Views\AcountHome\Home.cshtml" />
+    <Content Include="Views\AcountHome\TransactionHistory.cshtml" />
+    <Content Include="Views\BigCategory\Create.cshtml" />
+    <Content Include="Views\BigCategory\Edit.cshtml" />
+    <Content Include="Views\BigCategory\Index.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

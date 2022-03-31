@@ -210,14 +210,25 @@ namespace VinMart.Models.DAO
         {
             using (VinMartEntities db = new VinMartEntities())
             {
-                DeliveryAddress deliveryAddress = new DeliveryAddress();
-                db.DeliveryAddresses.Add(deliveryAddress);
+                Account account = db.Accounts.FirstOrDefault(a => a.id == idUser);
+                AccountDetail accountDetail = db.AccountDetails.FirstOrDefault(a => a.id == account.idAccountDetail);
+
+                Address deliveryAddress = new Address() {
+                    apartmentNumber = accountDetail.apartmentNumber,
+                    commune = accountDetail.Commune,
+                    name = account.displayName,
+                    email = account.email,
+                    district = accountDetail.district,
+                    phoneNumber = accountDetail.phoneNumber,
+                    province = accountDetail.province,
+                };
+                db.Addresses.Add(deliveryAddress);
 
                 Purchase purchase = new Purchase()
                 {
                     createAt = DateTime.Now,
                     idUser = idUser,
-                    idDeliveryAddress = deliveryAddress.id,
+                    idAddress = deliveryAddress.id,
                 };
                 db.Purchases.Add(purchase);
 
@@ -235,7 +246,6 @@ namespace VinMart.Models.DAO
                     db.PurchaseDetails.Add(purchaseDetail);
                     db.CartDetails.Remove(cartDetail);
                 }
-
                 db.SaveChanges();
             }
         }

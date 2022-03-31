@@ -16,6 +16,7 @@ namespace VinMart.Models
     {
         public Account()
         {
+            this.AddressUsers = new HashSet<AddressUser>();
             this.CartDetails = new HashSet<CartDetail>();
             this.Purchases = new HashSet<Purchase>();
         }
@@ -26,9 +27,11 @@ namespace VinMart.Models
         public string displayName { get; set; }
         public int position { get; set; }
         public string email { get; set; }
+        public int idAccountDetail { get; set; }
     
-        public virtual AccountPosition AccountPosition { get; set; }
         public virtual AccountDetail AccountDetail { get; set; }
+        public virtual AccountPosition AccountPosition { get; set; }
+        public virtual ICollection<AddressUser> AddressUsers { get; set; }
         public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
     }

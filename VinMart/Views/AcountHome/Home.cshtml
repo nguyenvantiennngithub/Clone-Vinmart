@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/public/css/Acount/AcountHome.css" />
+
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="~/public/css/base.css" rel="stylesheet" />
+    <link href="~/public/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Scripts/sweetalert.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*<div class="navbar-left">
+            <ul class="main_menu">
+                a href="/AcountHome/Acount">Tài Khoản</a>
+                <a href="/AcountHome/Address">Sổ Địa Chỉ</a>
+                <a href="/AcountHome/TransactionHistory">Lịch Sử Giao Dịch</a>
+                <a href="/AcountHome/LogOut">Đăng Xuất</a>
+            </ul>
+        </div>
+        <content class="tab-content">
+            @RenderBody()
+        </content>*@
+
+    <div class="container" style="margin-top: 120px; margin-bottom: 64px">
+        <div class="row">
+            <div class="col-lg-4" style="margin-top: 32px;">
+                <ul class="list-group">
+                    <a class="list-group-item" href="/AcountHome/Acount">Tài Khoản</a>
+                    <a class="list-group-item" href="/AcountHome/Address">Sổ Địa Chỉ</a>
+                    <a class="list-group-item" href="/AcountHome/TransactionHistory">Lịch Sử Giao Dịch</a>
+                    <a class="list-group-item" href="/AcountHome/LogOut">Đăng Xuất</a>
+                </ul>
+            </div>
+            <div class="col-lg-8">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @RenderPage("../Container/Footer.cshtml")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>

@@ -14,16 +14,21 @@ namespace VinMart.Models
     
     public partial class AccountDetail
     {
+        public AccountDetail()
+        {
+            this.Accounts = new HashSet<Account>();
+        }
+    
         public int id { get; set; }
         public Nullable<System.DateTime> birthDay { get; set; }
         public string phoneNumber { get; set; }
         public string gender { get; set; }
         public string province { get; set; }
         public string district { get; set; }
-        public string commune { get; set; }
+        public string Commune { get; set; }
         public string apartmentNumber { get; set; }
         public string detail { get; set; }
     
-        public virtual Account Account { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }

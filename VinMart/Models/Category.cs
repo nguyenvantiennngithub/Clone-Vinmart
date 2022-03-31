@@ -20,7 +20,7 @@ namespace VinMart.Models
         }
     
         public int id { get; set; }
-        public int idBigCategory { get; set; }
+        public Nullable<int> idBigCategory { get; set; }
         public string displayName { get; set; }
     
         public virtual BigCategory BigCategory { get; set; }

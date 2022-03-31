@@ -4,31 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e324f4a9bf6540f9abdd00259e1fc008" Name="Diagram1">
-        <EntityTypeShape EntityType="VinMartModel.Account" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VinMartModel.AccountDetail" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="VinMartModel.AccountPosition" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+      <Diagram DiagramId="beacdfea5d924d92b9a93c1d79ed82b7" Name="Diagram1">
+        <EntityTypeShape EntityType="VinMartModel.Account" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VinMartModel.AccountDetail" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VinMartModel.AccountPosition" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VinMartModel.Address" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VinMartModel.AddressUser" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.BigCategory" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.CartDetail" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.Category" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="VinMartModel.DeliveryAddress" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.Product" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.ProductDetail" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.ProductStatu" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="VinMartModel.Purchase" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VinMartModel.Purchase" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="VinMartModel.PurchaseDetail" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="VinMartModel.FK__Account__positio__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__AccountDetai__id__29572725" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__CartDetai__idUse__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Purchase__idUser__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Category__idBigC__2F10007B" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__CartDetai__idPro__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Product__idCateg__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Purchase__idDeli__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Product__idProdu__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__Product__status__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__PurchaseD__idPro__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="VinMartModel.FK__PurchaseD__idPur__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Account__idAccou__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Account__positio__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__AddressUs__idUse__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__CartDetai__idUse__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Purchase__idUser__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__AddressUs__idAdd__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Purchase__idAddr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Category__idBigC__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__CartDetai__idPro__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Product__idCateg__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Product__idProdu__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__Product__status__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__PurchaseD__idPro__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="VinMartModel.FK__PurchaseD__idPur__48CFD27E" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

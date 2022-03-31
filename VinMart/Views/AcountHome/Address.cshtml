@@ -1,0 +1,62 @@
+﻿@model VinMart.Models.ViewModel.AccountListAddressVM
+
+@{
+    ViewBag.Title = "Address";
+    Layout = "~/Views/AcountHome/Home.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/public/css/Acount/Address.css" />
+</head>
+@Html.Partial("~/Views/Container/Header.cshtml", Model.CartDetailProducts)
+
+<body>
+    <fieldset>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; margin-bottom: 16px;">
+            <h2 style="margin: 0;">Address</h2>
+            <a class="btn btn-success" href="/AcountHome/AddressAdd">     Thêm    </a>
+        </div>
+        <div style="min-height: 300px;">
+            <table class="table">
+                <tr>
+                    <th>
+                        Họ tên
+                    </th>
+                    <th>
+                        Địa chỉ
+                    </th>
+                    <th>
+                        SDT
+
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.ListAddress)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @item.apartmentNumber, @item.commune, @item.district, @item.province
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.phoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </fieldset>
+</body>

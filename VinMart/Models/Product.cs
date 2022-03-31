@@ -27,8 +27,8 @@ namespace VinMart.Models
         public double price { get; set; }
         public double salePrice { get; set; }
         public string unit { get; set; }
-        public int idProductDetail { get; set; }
-        public int status { get; set; }
+        public Nullable<int> idProductDetail { get; set; }
+        public Nullable<int> status { get; set; }
     
         public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual Category Category { get; set; }
