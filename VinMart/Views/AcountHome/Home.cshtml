@@ -50,3 +50,15 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+<style>
+    .list-group-item.active {
+        color: #fff;
+        background-color: #ff3f39;
+    }
+</style>
+
+<script>
+    console.log($('a[href="@Request.Url.LocalPath"]'))
+    $('a[href="@Request.Url.LocalPath"]').addClass('active');
+</script>

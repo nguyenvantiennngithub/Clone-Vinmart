@@ -70,15 +70,15 @@ namespace DoAnWeb3.Controllers
             {
                 return HttpNotFound();
             }
-            userSession.DisplayName = collection["DisplayName"];
-            acountDetail.phoneNumber = collection["PhoneNumber"];
-            userSession.Email = collection["Email"];
-            acountDetail.gender = collection["Gender"];
-            //acountDetail.birthDay = DateTime.Parse(String.Format("{mm/dd/yyyy}", collection["BirthDay"]));
-            acountDetail.province = collection["Province"];
-            acountDetail.district = collection["District"];
-            acountDetail.Commune = collection["Commune"];
-            acountDetail.apartmentNumber = collection["ApartmentNumber"];
+            userSession.DisplayName = collection["AcountFullDetail.DisplayName"];
+            acountDetail.phoneNumber = collection["AcountFullDetail.PhoneNumber"];
+            userSession.Email = collection["AcountFullDetail.Email"];
+            acountDetail.gender = collection["AcountFullDetail.Gender"];
+            //acountDetail.birthDay = DateTime.Parse(String.Format("{mm/dd/yyyy}", collection["AcountFullDetail.BirthDay"]));
+            acountDetail.province = collection["AcountFullDetail.Province"];
+            acountDetail.district = collection["AcountFullDetail.District"];
+            acountDetail.Commune = collection["AcountFullDetail.Commune"];
+            acountDetail.apartmentNumber = collection["AcountFullDetail.ApartmentNumber"];
 
             AcountFullDetail a = new AcountFullDetail();
             a.Id = userSession.Id;
@@ -147,13 +147,13 @@ namespace DoAnWeb3.Controllers
             //var acount = (Account)Session[UserInfo.UserSession];
             Address a = new Address();
             a.id = userSession.Id;
-            a.name = collection["name"];
-            a.phoneNumber = collection["phoneNumber"];
-            a.email = collection["email"];
-            a.province = collection["province"];
-            a.district = collection["district"];
-            a.commune = collection["commune"];
-            a.apartmentNumber = collection["apartmentNumber"];
+            a.name = collection["Address.name"];
+            a.phoneNumber = collection["Address.phoneNumber"];
+            a.email = collection["Address.email"];
+            a.province = collection["Address.province"];
+            a.district = collection["Address.district"];
+            a.commune = collection["Address.commune"];
+            a.apartmentNumber = collection["Address.apartmentNumber"];
             db.Addresses.Add(a);
 
             AddressUser addressUser = new AddressUser() {
