@@ -8,10 +8,10 @@
     `
 }
 function htmlButtonAddChecked(cart, product) {
-    var productInCart = cart.find(item => item.IdProduct == product.Id)
     if (!cart) {
         return htmlButtonAddNew();
     } else if (productInCart) {
+        var productInCart = cart.find(item => item.IdProduct == product.Id)
         return htmlButtonAdded(productInCart.Count);
     } else {
         return htmlButtonAddNew();
@@ -99,8 +99,10 @@ function handleGetMoreProduct() {
             dataType: "json",
             type: "GET",
             success: function ({ data }) {
+                console.log(data)
                 successGetMoreProduct(data, currentContainer, pageIncreased);
                 //renderListProductItem(data.Products, currentContainer);
+                //get all cart to compare to render btn add
                 ajaxGetAllCart(data.Products, currentContainer);//to render list product
                 currentContainer.find('.spinner-container').remove();
             },
