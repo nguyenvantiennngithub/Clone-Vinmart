@@ -83,13 +83,23 @@
     right: -8px;
     top: 0;
     content: "";
+    display: none;
 }
 
-.navigation-dialog-menu-item-name:hover .navigation-dialog-menu-item-link{
+.navigation-dialog-menu-item-name:hover {
     text-decoration: none;
     background-color: #ed1c24;
     color: #fff;
 }
+.navigation-dialog-menu-item-name:hover .navigation-dialog-menu-item-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation-dialog-menu-item-name:hover::after {
+    display: block;
+}
+
 
 .navigation-dialog-submenu {
     position: absolute;
@@ -310,7 +320,8 @@
     margin: 16px 0 4px 0;
     cursor: pointer;
     color: #000;
-    product-item display: -webkit-box;
+    product-item; 
+    display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     font-size: 16px;
